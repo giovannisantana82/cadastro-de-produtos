@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import santana.giovanni.CadastroDeProdutos.model.ProdutoModel;
 import santana.giovanni.CadastroDeProdutos.repository.ProdutoRepository;
 
+import java.util.List;
+
 
 @Service
 public class ProdutoService {
@@ -15,8 +17,14 @@ public class ProdutoService {
     public ProdutoModel cadastrarProduto(ProdutoModel produtoModel){
         if (produtoModel.getQuantidade() <= 0) {
             throw new IllegalArgumentException("Quantidade inválida");
+        } else if (produtoModel.getNome().trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome inválido");
         }
-           return produtoRepository.save(produtoModel);
+        return produtoRepository.save(produtoModel);
 
+    }
+
+    public List<ProdutoModel> listarProduto() {
+        return produtoRepository.findAll();
     }
 }

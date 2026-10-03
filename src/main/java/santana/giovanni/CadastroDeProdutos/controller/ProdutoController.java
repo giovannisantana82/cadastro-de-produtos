@@ -2,11 +2,14 @@ package santana.giovanni.CadastroDeProdutos.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import santana.giovanni.CadastroDeProdutos.model.ProdutoModel;
 import santana.giovanni.CadastroDeProdutos.service.ProdutoService;
+
+import java.util.List;
 
 @RestController
 public class ProdutoController {
@@ -16,5 +19,9 @@ public class ProdutoController {
     public ResponseEntity<ProdutoModel> criarProduto(@RequestBody ProdutoModel produto) {
         return ResponseEntity.ok(produtoService.cadastrarProduto(produto));
 
+    }
+    @GetMapping("/produtos")
+    public ResponseEntity<List<ProdutoModel>> listarProduto(){
+        return ResponseEntity.ok(produtoService.listarProduto());
     }
 }
